@@ -1,0 +1,5 @@
+<androidx.wear.widget.WearableRecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/add_water_view_list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical" />
