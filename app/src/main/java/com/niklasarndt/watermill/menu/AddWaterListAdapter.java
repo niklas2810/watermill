@@ -62,16 +62,26 @@ public class AddWaterListAdapter extends RecyclerView.Adapter<AddWaterListAdapte
 
     public static class ItemHolder extends RecyclerView.ViewHolder {
         TextView itemText;
+        TextView mlText;
         LinearLayout container;
 
         public ItemHolder(View view) {
             super(view);
-            itemText = view.findViewById(R.id.addWaterText);
+
             container = view.findViewById(R.id.addWaterContainer);
+            itemText = view.findViewById(R.id.addWaterText);
+            mlText = view.findViewById(R.id.addWaterTextMl);
         }
 
         public void bind(AddWaterEntry entry) {
-            itemText.setText(entry.getMl() + "");
+            if (entry == null || entry.ml <= 0) {
+                itemText.setText("Reset");
+                mlText.setText("");
+            } else {
+                itemText.setText(entry.getMl() + "");
+                mlText.setText("ml");
+            }
+
         }
     }
 
