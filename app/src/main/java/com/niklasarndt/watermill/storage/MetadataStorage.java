@@ -9,6 +9,7 @@ public class MetadataStorage {
 
     private static final String META_PREFIX = "metadata";
     private static final String ADD_SCROLL_INDEX = META_PREFIX + "add_scroll_index";
+    private static final String LAST_NOTICATION = META_PREFIX + "last_notification";
 
     private static SharedPreferences getPrefs(Context context) {
         return context.getSharedPreferences(NamingConstants.META_PREFS, Context.MODE_PRIVATE);
@@ -27,5 +28,13 @@ public class MetadataStorage {
             edit.putInt(ADD_SCROLL_INDEX, index);
 
         return edit.commit();
+    }
+
+    public static long getLastNotification(Context context) {
+        return getPrefs(context).getLong(LAST_NOTICATION, System.currentTimeMillis());
+    }
+
+    public static boolean updateLastNotification(Context context) {
+        return getPrefs(context).edit().putLong(LAST_NOTICATION, System.currentTimeMillis()).commit();
     }
 }

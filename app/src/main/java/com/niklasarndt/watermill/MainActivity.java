@@ -10,6 +10,7 @@ import androidx.wear.ambient.AmbientModeSupport;
 import com.niklasarndt.watermill.anim.ProgressBarAnimation;
 import com.niklasarndt.watermill.databinding.ActivityMainBinding;
 import com.niklasarndt.watermill.menu.ambient.MainAmbientCallback;
+import com.niklasarndt.watermill.notification.NotificationManager;
 import com.niklasarndt.watermill.storage.SettingsStorage;
 import com.niklasarndt.watermill.storage.WaterStorage;
 
@@ -32,6 +33,10 @@ public class MainActivity extends FragmentActivity implements AmbientModeSupport
         binding.mainProgressCircle.setProgress(0);
 
         ambientController = AmbientModeSupport.attach(this);
+
+        if (SettingsStorage.hasRemindersEnabled(this)) {
+            NotificationManager.scheduleReminder(this);
+        }
     }
 
     public void enterAmbient() {
