@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import com.niklasarndt.watermill.storage.MetadataStorage;
 import com.niklasarndt.watermill.storage.SettingsStorage;
@@ -19,6 +20,7 @@ public class NotificationPublisher extends BroadcastReceiver {
         long last = MetadataStorage.getLastNotification(context);
 
         if (!SettingsStorage.hasRemindersEnabled(context) || System.currentTimeMillis() - last < 60_000) {
+            Log.i("watermill-reminder", "Not because disabled or too recent");
             return;
         }
 

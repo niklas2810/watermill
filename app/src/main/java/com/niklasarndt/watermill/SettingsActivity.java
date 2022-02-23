@@ -24,6 +24,14 @@ public class SettingsActivity extends Activity {
         binding.submitButton.setOnClickListener(this::submit);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        binding.goalInput.setText(SettingsStorage.getDailyGoal(this) + "");
+        binding.remindersInput.setChecked(SettingsStorage.hasRemindersEnabled(this));
+    }
+
     private void submit(View caller) {
         try {
             int newGoal = Integer.parseInt(binding.goalInput.getText().toString());
@@ -35,13 +43,8 @@ public class SettingsActivity extends Activity {
             return;
         }
 
+        SettingsStorage.setRemindersEnabled(this, binding.remindersInput.isChecked());
+
         finish();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        binding.goalInput.setText(SettingsStorage.getDailyGoal(this) + "");
     }
 }

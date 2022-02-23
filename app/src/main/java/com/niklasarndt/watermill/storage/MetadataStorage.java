@@ -31,7 +31,7 @@ public class MetadataStorage {
     }
 
     public static long getLastNotification(Context context) {
-        return getPrefs(context).getLong(LAST_NOTICATION, System.currentTimeMillis());
+        return getPrefs(context).getLong(LAST_NOTICATION, 0);
     }
 
     public static boolean updateLastNotification(Context context) {

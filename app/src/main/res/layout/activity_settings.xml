@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.wear.widget.BoxInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/box_inset_layout_padding"
-    tools:context=".SettingsActivity"
-    tools:deviceIds="wear">
+    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="@dimen/inner_frame_layout_padding"
-        app:layout_boxedEdges="all">
+        android:paddingStart="?android:listPreferredItemPaddingStart"
+        android:paddingTop="?android:dialogPreferredPadding"
+        android:paddingEnd="?android:listPreferredItemPaddingEnd"
+        android:paddingBottom="?android:dialogPreferredPadding">
 
         <TextView
             android:id="@+id/settingsLabel"
@@ -26,14 +25,16 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/goalLabel"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Goal" />
@@ -57,6 +58,30 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/remindersLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Reminders" />
+
+            <Switch
+                android:id="@+id/remindersInput"
+                style="@style/Widget.Wear.RoundSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
         <Button
             android:id="@+id/submitButton"
             android:layout_width="wrap_content"
@@ -64,4 +89,4 @@
             android:layout_gravity="center_horizontal"
             android:text="Done" />
     </LinearLayout>
-</androidx.wear.widget.BoxInsetLayout>
+</androidx.core.widget.NestedScrollView>
