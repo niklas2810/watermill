@@ -25,6 +25,7 @@ public class MainActivity extends Activity {
 
         binding.mainAddButton.setOnClickListener(this::onAddClicked);
         binding.mainProgressPercent.setOnClickListener(this::onSettingsOpened);
+        binding.mainProgressCircle.setProgress(0);
     }
 
     private void onSettingsOpened(View caller) {
