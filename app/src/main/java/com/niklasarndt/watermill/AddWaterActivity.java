@@ -9,6 +9,7 @@ import androidx.wear.widget.WearableRecyclerView;
 
 import com.niklasarndt.watermill.databinding.ActivityAddWaterBinding;
 import com.niklasarndt.watermill.menu.AddWaterListAdapter;
+import com.niklasarndt.watermill.storage.MetadataStorage;
 import com.niklasarndt.watermill.storage.WaterStorage;
 
 import java.time.LocalDate;
@@ -42,7 +43,14 @@ public class AddWaterActivity extends Activity {
 
         recyclerView.setAdapter(adapter);
         new LinearSnapHelper().attachToRecyclerView(recyclerView);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        int index = MetadataStorage.getAddScrollIndex(this);
+        binding.addWaterViewList.postDelayed(() -> binding.addWaterViewList.scrollToPosition(index), 100);
     }
 
     private void onEntryClicked(AddWaterListAdapter.AddWaterEntry entry) {
@@ -52,6 +60,8 @@ public class AddWaterActivity extends Activity {
             WaterStorage.setWaterForDay(this, LocalDate.now(), 0);
         else
             WaterStorage.addWaterForDay(this, LocalDate.now(), entry.getMl());
+
+        MetadataStorage.setAddScrollIndex(this, entry.index);
 
         finish();
     }

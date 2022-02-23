@@ -39,8 +39,9 @@ public class AddWaterListAdapter extends RecyclerView.Adapter<AddWaterListAdapte
     public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
         AddWaterEntry entry = isValidIndex(position) ? data.get(position) : null;
 
-        holder.bind(data.get(position));
+        holder.bind(entry);
         holder.container.setOnClickListener(v -> {
+            entry.index = holder.getBindingAdapterPosition();
             if (onClick != null) onClick.accept(entry);
         });
     }
@@ -75,6 +76,7 @@ public class AddWaterListAdapter extends RecyclerView.Adapter<AddWaterListAdapte
     }
 
     public static class AddWaterEntry {
+        public int index = 0;
         private final int ml;
 
         AddWaterEntry(int ml) {
