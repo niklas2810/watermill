@@ -1,20 +1,24 @@
 package com.niklasarndt.watermill;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.fragment.app.FragmentActivity;
+import androidx.wear.ambient.AmbientModeSupport;
+
 import com.niklasarndt.watermill.anim.ProgressBarAnimation;
 import com.niklasarndt.watermill.databinding.ActivityMainBinding;
+import com.niklasarndt.watermill.menu.ambient.MainAmbientCallback;
 import com.niklasarndt.watermill.storage.SettingsStorage;
 import com.niklasarndt.watermill.storage.WaterStorage;
 
 import java.time.LocalDate;
 
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity implements AmbientModeSupport.AmbientCallbackProvider {
 
     private ActivityMainBinding binding;
+    private AmbientModeSupport.AmbientController ambientController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +30,26 @@ public class MainActivity extends Activity {
         binding.mainAddButton.setOnClickListener(this::onAddClicked);
         binding.mainProgressPercent.setOnClickListener(this::onSettingsOpened);
         binding.mainProgressCircle.setProgress(0);
+
+        ambientController = AmbientModeSupport.attach(this);
+    }
+
+    public void enterAmbient() {
+        binding.mainProgressCircle.setVisibility(View.GONE);
+        binding.mainAddButton.setVisibility(View.GONE);
+
+        int gray = getResources().getColor(R.color.gray, getTheme());
+        binding.mainProgressPercent.setTextColor(gray);
+        binding.mainProgressExact.setTextColor(gray);
+    }
+
+    public void exitAmbient() {
+        binding.mainProgressCircle.setVisibility(View.VISIBLE);
+        binding.mainAddButton.setVisibility(View.VISIBLE);
+
+        int textColor = getResources().getColor(R.color.text, getTheme());
+        binding.mainProgressPercent.setTextColor(textColor);
+        binding.mainProgressExact.setTextColor(textColor);
     }
 
     private void onSettingsOpened(View caller) {
@@ -55,5 +79,10 @@ public class MainActivity extends Activity {
     protected void onResume() {
         super.onResume();
         refreshUi();
+    }
+
+    @Override
+    public AmbientModeSupport.AmbientCallback getAmbientCallback() {
+        return new MainAmbientCallback(this);
     }
 }

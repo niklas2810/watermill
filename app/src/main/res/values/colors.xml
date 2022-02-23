@@ -2,9 +2,11 @@
 <resources>
 
     <color name="white">#FFFFFFFF</color>
+    <color name="gray">#C1C1C1</color>
     <color name="blue">#FF003CC0</color>
 
     <color name="primary">@color/blue</color>
+    <color name="secondary">@color/gray</color>
     <color name="text">@color/white</color>
 
 </resources>
