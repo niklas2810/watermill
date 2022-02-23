@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">#FF003CC0</color>
-    <color name="text">#FFFFFFFF</color>
+
+    <color name="white">#FFFFFFFF</color>
+    <color name="blue">#FF003CC0</color>
+
+    <color name="primary">@color/blue</color>
+    <color name="text">@color/white</color>
 
 </resources>
