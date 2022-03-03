@@ -26,7 +26,6 @@ public class NotificationPublisher extends BroadcastReceiver {
 
         MetadataStorage.updateLastNotification(context);
         Notification notification = intent.getParcelableExtra(NOTIFICATION_OBJ);
-        int id = intent.getIntExtra(NOTIFICATION_ID, 0);
-        NotificationManager.display(context, id, notification);
+        NotificationManager.display(context, (int) System.currentTimeMillis(), notification);
     }
 }

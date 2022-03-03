@@ -32,13 +32,12 @@ public class NotificationManager {
         }
     }
 
-    public static void scheduleNotification(Context context, String content, int id, long delayInMs) {
-        scheduleNotification(context, build(context, content), id, delayInMs);
+    public static void scheduleNotification(Context context, String content, long delayInMs) {
+        scheduleNotification(context, build(context, content), delayInMs);
     }
 
-    public static void scheduleNotification(Context context, Notification not, int id, long delayInMs) {
+    public static void scheduleNotification(Context context, Notification not, long delayInMs) {
         Intent notIntent = new Intent(context, NotificationPublisher.class);
-        notIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, id);
         notIntent.putExtra(NotificationPublisher.NOTIFICATION_OBJ, not);
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, notIntent, 0);
@@ -57,7 +56,7 @@ public class NotificationManager {
                 .setContentTitle("Watermill")
                 .setContentText(content)
                 .setSmallIcon(R.drawable.ic_notfication_icon)
-                .setAutoCancel(true).setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setAutoCancel(true).setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(pendingIntent)
                 .build();
     }
@@ -99,6 +98,6 @@ public class NotificationManager {
         Log.i("watermill-reminder", String.format("Reminder in %d minutes", delay / 1000 / 60));
 
         if (delay > 0)
-            scheduleNotification(context, build, NotificationConstants.REMINDER_ID, delay);
+            scheduleNotification(context, build, delay);
     }
 }
